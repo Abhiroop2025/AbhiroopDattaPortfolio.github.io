@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abhiroop Datta — Product Specialist & Implementation Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --blue: #1A56DB;
+    --blue-light: #3B82F6;
+    --sky: #E8F0FE;
+    --ink: #0D1117;
+    --mid: #4A5568;
+    --dim: #718096;
+    --line: #E2E8F0;
+    --white: #FFFFFF;
+    --off: #F7F9FC;
+    --accent2: #0EA5E9;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(10,22,40,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 80px 48px 48px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(26,86,219,0.2);
+    border: 1px solid rgba(26,86,219,0.4);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 0.75rem; font-weight: 600;
+    color: #93C5FD;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; background: #22D3EE;
+    border-radius: 50%; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 12px;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .hero-name em { color: #60A5FA; font-style: italic; }
+
+  .hero-title {
+    font-size: 1.15rem; color: rgba(255,255,255,0.5);
+    font-weight: 400; margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+
+  .hero-desc {
+    font-size: 1rem; color: rgba(255,255,255,0.7);
+    line-height: 1.75; max-width: 480px;
+    margin-bottom: 40px;
+    opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.75s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s; cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--blue); color: var(--white);
+    border: 1px solid var(--blue);
+  }
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); color: var(--white); }
+
+  /* Hero right: stat cards */
+  .hero-right {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 24px 20px;
+    transition: background 0.2s;
+  }
+  .stat-card:hover { background: rgba(255,255,255,0.07); }
+  .stat-card.wide { grid-column: span 2; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem; color: var(--white); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-num span { color: #60A5FA; }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 500; }
+
+  /* tags cloud in wide card */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .chip {
+    display: inline-flex; padding: 4px 10px;
+    border-radius: 100px; font-size: 0.72rem; font-weight: 600;
+    background: rgba(26,86,219,0.25); color: #93C5FD;
+    border: 1px solid rgba(26,86,219,0.35);
+  }
+
+  /* Background decoration */
+  .hero-bg-ring {
+    position: absolute; right: -200px; top: 50%; transform: translateY(-50%);
+    width: 700px; height: 700px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+  .hero-bg-ring::after {
+    content:''; position:absolute; inset:60px; border-radius:50%;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 96px 48px; }
+  .inner { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 1rem; color: var(--mid); max-width: 560px; line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  /* ── EXPERTISE ── */
+  #expertise { background: var(--off); }
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .exp-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px; padding: 28px 24px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .exp-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
+  .exp-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 16px;
+  }
+  .icon-blue { background: var(--sky); }
+  .icon-green { background: #ECFDF5; }
+  .icon-purple { background: #F3F0FF; }
+  .exp-card h3 {
+    font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--ink);
+  }
+  .exp-card p { font-size: 0.85rem; color: var(--mid); line-height: 1.65; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .exp-tag {
+    padding: 3px 9px; border-radius: 100px; font-size: 0.72rem; font-weight: 600;
+    background: var(--sky); color: var(--blue);
+  }
+
+  /* ── TIMELINE ── */
+  #experience { background: var(--white); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 20px; top: 8px; bottom: 0;
+    width: 1px; background: var(--line);
+  }
+  .tl-item { display: flex; gap: 40px; margin-bottom: 48px; position: relative; }
+  .tl-dot {
+    flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--blue); display: flex; align-items: center;
+    justify-content: center; font-size: 1rem; z-index: 1;
+    margin-top: 2px;
+  }
+  .tl-dot.dim { background: var(--sky); }
+  .tl-body { flex: 1; }
+  .tl-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
+  .tl-role { font-weight: 700; font-size: 1rem; color: var(--ink); }
+  .tl-date {
+    font-size: 0.78rem; font-weight: 600; color: var(--blue);
+    background: var(--sky); padding: 3px 10px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .tl-company { font-size: 0.88rem; color: var(--mid); margin-bottom: 12px; }
+  .tl-desc { font-size: 0.9rem; color: var(--mid); line-height: 1.7; margin-bottom: 12px; }
+  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .tl-bullets li {
+    font-size: 0.875rem; color: var(--mid); line-height: 1.6;
+    padding-left: 18px; position: relative;
+  }
+  .tl-bullets li::before {
+    content: '→'; position: absolute; left: 0; color: var(--blue); font-weight: 700;
+  }
+
+  /* ── IMPACT NUMBERS ── */
+  #impact {
+    background: var(--navy);
+    padding: 80px 48px;
+  }
+  #impact .section-title { color: var(--white); }
+  #impact .section-tag { color: #60A5FA; }
+  #impact .section-sub { color: rgba(255,255,255,0.55); }
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .impact-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 28px 20px; text-align: center;
+  }
+  .impact-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem; color: #60A5FA; line-height: 1; margin-bottom: 6px;
+  }
+  .impact-label { font-size: 0.82rem; color: rgba(255,255,255,0.5); font-weight: 500; }
+
+  /* ── EDUCATION + ACHIEVEMENTS ── */
+  #about { background: var(--off); }
+  .edu-ach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .block-title {
+    font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 20px;
+  }
+  .edu-item { margin-bottom: 20px; }
+  .edu-deg { font-weight: 700; font-size: 0.95rem; color: var(--ink); }
+  .edu-inst { font-size: 0.85rem; color: var(--mid); margin-top: 2px; }
+  .edu-year { font-size: 0.78rem; color: var(--dim); margin-top: 2px; }
+  .ach-item {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 16px; border-radius: 10px;
+    background: var(--white); border: 1px solid var(--line);
+    margin-bottom: 12px;
+  }
+  .ach-star { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .ach-text { font-size: 0.875rem; color: var(--mid); line-height: 1.55; }
+  .ach-text b { color: var(--ink); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--white); text-align: center; }
+  .contact-card {
+    max-width: 600px; margin: 0 auto;
+    background: var(--navy); border-radius: 20px; padding: 56px 48px;
+  }
+  .contact-card .section-title { color: var(--white); font-size: 2rem; margin-bottom: 12px; }
+  .contact-card p { color: rgba(255,255,255,0.6); margin-bottom: 32px; font-size: 0.95rem; }
+  .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85);
+    text-decoration: none; font-size: 0.88rem; font-weight: 500;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--off); border-top: 1px solid var(--line);
+    padding: 24px 48px; text-align: center;
+    font-size: 0.8rem; color: var(--dim);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    #hero { padding: 80px 24px 48px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-right { display: grid; grid-template-columns: repeat(2,1fr); }
+    section { padding: 64px 24px; }
+    .expertise-grid { grid-template-columns: 1fr 1fr; }
+    .impact-grid { grid-template-columns: 1fr 1fr; }
+    .edu-ach-grid { grid-template-columns: 1fr; }
+    .contact-card { padding: 40px 24px; }
+    footer { padding: 20px 24px; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .impact-grid { grid-template-columns: 1fr 1fr; }
+    .hero-right { grid-template-columns: 1fr; }
+    .stat-card.wide { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Abhiroop Datta</div>
+  <div class="nav-links">
+    <a href="#expertise">Expertise</a>
+    <a href="#experience">Experience</a>
+    <a href="#impact">Impact</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-ring"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Open to new opportunities
+      </div>
+      <h1 class="hero-name">Abhiroop<br><em>Datta</em></h1>
+      <p class="hero-title">Product Specialist · Technical Implementation Consultant</p>
+      <p class="hero-desc">
+        8+ years building and scaling data platforms, APIs, and AI-driven products across fintech and SaaS.
+        I sit at the intersection of <strong style="color:#fff">product, engineering, and go-to-market</strong>
+        — turning complex technical requirements into solutions that actually ship.
+      </p>
+      <div class="hero-actions">
+        <a href="#experience" class="btn btn-primary">↓ View Experience</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-num">8<span>+</span></div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Team Members Led</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">0→1 Product Launches</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Integrations Shipped</div>
+      </div>
+      <div class="stat-card wide">
+        <div class="stat-label" style="margin-bottom:8px">Core Skills</div>
+        <div class="tag-cloud">
+          <span class="chip">API Platforms</span>
+          <span class="chip">LLM / MCP</span>
+          <span class="chip">Data Lakes</span>
+          <span class="chip">CRM Integration</span>
+          <span class="chip">GCP / BigQuery</span>
+          <span class="chip">GTM</span>
+          <span class="chip">Fintech</span>
+          <span class="chip">0→1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="inner">
+    <div class="section-tag">What I Bring</div>
+    <h2 class="section-title">Areas of Deep Expertise</h2>
+    <p class="section-sub">A rare combination of product thinking, technical depth, and customer-facing execution.</p>
+    <div class="expertise-grid">
+
+      <div class="exp-card">
+        <div class="exp-icon icon-blue">🔗</div>
+        <h3>API & Data Platform Strategy</h3>
+        <p>End-to-end ownership of API products — from schema design to developer experience, adoption metrics, and enterprise delivery.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">REST APIs</span>
+          <span class="exp-tag">Schema Design</span>
+          <span class="exp-tag">Data Lakes</span>
+          <span class="exp-tag">GCP</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon icon-purple">🤖</div>
+        <h3>LLM & AI Product Integration</h3>
+        <p>Built MCP connectors across multiple LLMs. Pioneered natural language → API interactions, lowering the bar for non-technical users.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">MCP</span>
+          <span class="exp-tag">LLM Integrations</span>
+          <span class="exp-tag">NL → API</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon icon-green">⚙️</div>
+        <h3>Enterprise Implementation</h3>
+        <p>Designing and deploying end-to-end workflows for enterprise customers: data ingestion, CRM sync, portfolio monitoring, and alerting systems.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">CRM Integration</span>
+          <span class="exp-tag">Workflow Design</span>
+          <span class="exp-tag">Portfolio Monitoring</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon icon-blue">🚀</div>
+        <h3>0→1 Product Launches</h3>
+        <p>Taken multiple products from concept to market: defining workflows, onboarding partners, training BD teams, and driving adoption.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">GTM</span>
+          <span class="exp-tag">0→1</span>
+          <span class="exp-tag">Partner Onboarding</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon icon-purple">📊</div>
+        <h3>Developer Experience</h3>
+        <p>Improved API adoption through use-case driven documentation, wrapper APIs, integration guides, and troubleshooting frameworks.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">API Docs</span>
+          <span class="exp-tag">Wrapper APIs</span>
+          <span class="exp-tag">DX</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon icon-green">🤝</div>
+        <h3>Cross-functional Leadership</h3>
+        <p>Leading teams across presales, onboarding, support, and product. Translating between business stakeholders and engineering teams.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Team of 4</span>
+          <span class="exp-tag">Stakeholder Mgmt</span>
+          <span class="exp-tag">Presales</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="inner">
+    <div class="section-tag">Career Journey</div>
+    <h2 class="section-title">Experience</h2>
+    <p class="section-sub">From building backend systems at TCS to leading data product strategy at Tracxn.</p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot">🏢</div>
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Product Specialist – Data Solutions</span>
+            <span class="tl-date">Jul 2024 – Present</span>
+          </div>
+          <div class="tl-company">Tracxn · Bengaluru, India</div>
+          <p class="tl-desc">Lead the Data Solutions function — owning product strategy, delivery, and adoption across APIs, data infrastructure, and AI-powered workflows. Manage a cross-functional team of 4 covering presales through delivery.</p>
+          <ul class="tl-bullets">
+            <li>Built end-to-end data delivery ecosystem: APIs, exports, data lakes, CRM integrations, Google Sheets, and MCP (LLM) connectors for enterprise customers</li>
+            <li>Developed MCP connectors across multiple LLMs; enabled natural language → API interactions, reducing technical dependency and support volume</li>
+            <li>Led GTM for new capabilities — trained BD teams, authored use-case blogs to accelerate API adoption</li>
+            <li>Configured and scaled GCP data pipelines for high-volume, low-latency delivery</li>
+            <li>Defined and tracked KPIs: usage, adoption, latency — driving data-led product prioritization</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot">📱</div>
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Integration Manager – Gateway</span>
+            <span class="tl-date">Mar 2022 – Jun 2024</span>
+          </div>
+          <div class="tl-company">Smallcase Technologies · Bengaluru, India</div>
+          <p class="tl-desc">Technical implementation consultant and product enabler for smallcase's investment APIs. Drove partner integrations, workflow design, and GTM for new product capabilities.</p>
+          <ul class="tl-bullets">
+            <li>Led 0→1 launch of <strong>Loan Against Mutual Funds (LAMF)</strong> and <strong>Mutual Fund Holdings Import</strong> — end-to-end from workflow design through partner onboarding and GTM</li>
+            <li>Designed end-to-end investment workflows: onboarding, order execution, holdings sync, portfolio tracking</li>
+            <li>Owned full partner onboarding journeys: technical consultation, sandbox, debugging, go-live</li>
+            <li>Improved API usability via use-case driven docs, integration guides, and troubleshooting frameworks</li>
+            <li>Enabled multiple partner launches contributing to increased API adoption and transaction volumes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot dim">🏦</div>
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Strategic Partnerships Manager</span>
+            <span class="tl-date">May 2019 – Mar 2022</span>
+          </div>
+          <div class="tl-company">ABSL AMC (Aditya Birla Sun Life Asset Management)</div>
+          <p class="tl-desc">Managed strategic fintech partnerships and drove API-led distribution of mutual fund products.</p>
+          <ul class="tl-bullets">
+            <li>Led integrations with <strong>Groww</strong> and <strong>INDmoney</strong> — API-driven MF transactions including onboarding, purchases, redemptions, and portfolio tracking</li>
+            <li>Owned implementation of instant redemption for liquid funds — near real-time liquidity, a critical competitive differentiator</li>
+            <li>Supported NFO launches coordinating across partners and internal teams; recipient of CEO Kitty Award</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot dim">💻</div>
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Assistant Systems Engineer</span>
+            <span class="tl-date">Sep 2015 – Apr 2017</span>
+          </div>
+          <div class="tl-company">Tata Consultancy Services (TCS)</div>
+          <p class="tl-desc">Built and supported an insurance claim processing platform for a Fortune 500 client — hands-on backend development, OCR automation, and full SDLC.</p>
+          <ul class="tl-bullets">
+            <li>Developed Java Spring Boot backend services for claim processing workflows</li>
+            <li>Contributed to OCR-driven document processing for automated claim data extraction</li>
+            <li>Full SDLC participation: requirements through production support</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="inner">
+    <div class="section-tag">By the Numbers</div>
+    <h2 class="section-title">Career Impact</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.5)">A track record of shipping and scaling, not just planning.</p>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-num">8+</div>
+        <div class="impact-label">Years Building at the API / Data Layer</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">3+</div>
+        <div class="impact-label">0→1 Products Taken to Market</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">4</div>
+        <div class="impact-label">Companies Across Fintech & SaaS</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">∞</div>
+        <div class="impact-label">Enterprise Integrations Delivered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / EDUCATION / ACHIEVEMENTS -->
+<section id="about">
+  <div class="inner">
+    <div class="section-tag">Background</div>
+    <h2 class="section-title">Education & Achievements</h2>
+    <div class="edu-ach-grid">
+      <div>
+        <div class="block-title">Education</div>
+        <div class="edu-item">
+          <div class="edu-deg">MBA</div>
+          <div class="edu-inst">TAPMI · T.A. Pai Management Institute</div>
+          <div class="edu-year">Manipal, India · April 2019</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">B.Tech, Computer Science</div>
+          <div class="edu-inst">Techno India College</div>
+          <div class="edu-year">Kolkata, India · July 2015</div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--mid);line-height:1.7;margin-top:24px;">
+          A rare combination of a technical CS foundation and an MBA — enabling me to operate fluidly across product, engineering, and business contexts.
+        </p>
+      </div>
+      <div>
+        <div class="block-title">Achievements</div>
+        <div class="ach-item">
+          <div class="ach-star">🏆</div>
+          <div class="ach-text"><b>CEO Kitty Award</b> — ABSL AMC. Awarded for outstanding performance and business impact.</div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-star">⚡</div>
+          <div class="ach-text">Drove high-impact integrations: <b>Loan Against Securities</b> and <b>Mutual Fund Holdings Import</b> — both 0→1 launches at Smallcase Technologies.</div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-star">🚀</div>
+          <div class="ach-text">Delivered <b>0→1 API launches</b> — Real-Time Curation API and Wrapper APIs — from concept through adoption.</div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-star">🤖</div>
+          <div class="ach-text">Early mover on <b>MCP (Model Context Protocol)</b> connectors — pioneering LLM → API interaction patterns at Tracxn.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="contact-card">
+      <div class="section-tag" style="color:#60A5FA">Let's Connect</div>
+      <h2 class="section-title">Open to Conversations</h2>
+      <p>Interested in roles at the intersection of product, data, and AI. Let's talk about what you're building.</p>
+      <div class="contact-links">
+        <a href="mailto:abhiroopdatta@yahoo.com" class="contact-link">
+          ✉️ abhiroopdatta@yahoo.com
+        </a>
+        <a href="https://linkedin.com/in/abhiroop-datta-a5b8258" target="_blank" class="contact-link">
+          🔗 LinkedIn
+        </a>
+        <a href="tel:+918777040798" class="contact-link">
+          📱 +91 8777040798
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Abhiroop Datta · Bengaluru, India
+</footer>
+
+</body>
+</html>
